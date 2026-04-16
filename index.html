@@ -29,7 +29,6 @@
             transform: translateY(-10px); 
         }
 
-        /* Estilo para las imágenes de la galería */
         .gallery-item {
             overflow: hidden;
             border-radius: 1.5rem;
@@ -41,9 +40,36 @@
         .gallery-item:hover img {
             transform: scale(1.1);
         }
+
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .whatsapp-float {
+            animation: pulse-green 2s infinite;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900">
+
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/message/LMEFLXQLHABGJ1" target="_blank" class="whatsapp-float fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-2xl hover:scale-110 transition-transform duration-300">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="absolute -top-1 -right-1 flex h-5 w-5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-5 w-5 bg-red-500 border-2 border-white"></span>
+        </span>
+    </a>
 
     <!-- Navegación -->
     <nav class="fixed w-full z-50 glass border-b border-slate-200">
@@ -89,12 +115,7 @@
 
     <!-- Hero Section -->
     <header id="inicio" class="pt-32 pb-20 gradient-blue text-white relative overflow-hidden">
-        <div class="absolute inset-0 opacity-5 pointer-events-none">
-            <svg class="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <path d="M0 100 L50 0 L100 100 Z" fill="white"/>
-            </svg>
-        </div>
-
+        <canvas id="hero-canvas" class="opacity-30"></canvas>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8">
@@ -116,10 +137,9 @@
                         </a>
                     </div>
                 </div>
-
-                <div class="hidden md:block relative">
+                <div class="hidden md:block relative text-center">
                     <div class="absolute -inset-4 bg-blue-500/20 blur-3xl rounded-full"></div>
-                    <div class="relative bg-slate-800 p-8 rounded-3xl border border-white/10 shadow-2xl text-center">
+                    <div class="relative bg-slate-800 p-8 rounded-3xl border border-white/10 shadow-2xl">
                         <i class="fa-solid fa-map-location-dot text-6xl text-blue-500 mb-4"></i>
                         <h3 class="text-2xl font-bold mb-2">Sede Putumayo</h3>
                         <p class="text-slate-400">Atención presencial y técnica en toda la región.</p>
@@ -129,14 +149,14 @@
         </div>
     </header>
 
-    <!-- Nueva Sección: Ubicación Putumayo -->
+    <!-- Sección de Ubicación -->
     <section class="py-16 bg-blue-600 text-white overflow-hidden relative">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center md:text-left">
             <div class="flex flex-col md:flex-row items-center justify-between gap-8">
                 <div class="md:w-2/3">
                     <h2 class="text-3xl font-extrabold mb-4">Estamos en el Departamento del Putumayo</h2>
                     <p class="text-blue-100 text-lg leading-relaxed">
-                        Brindamos cobertura total en Mocoa, Villagarzón, Puerto Asís y demás municipios del departamento. Nuestra ubicación estratégica nos permite ofrecer un soporte técnico rápido y eficiente para empresas y hogares putumayenses.
+                        Brindamos cobertura total en Mocoa, Villagarzón, Puerto Asís y demás municipios. Nuestra ubicación nos permite ofrecer un soporte rápido y eficiente.
                     </p>
                 </div>
                 <div class="md:w-1/3 flex justify-center">
@@ -148,260 +168,144 @@
                 </div>
             </div>
         </div>
-        <!-- Decoración abstracta -->
-        <div class="absolute right-0 top-0 opacity-10 translate-x-1/4 -translate-y-1/4">
-            <i class="fa-solid fa-mountain-sun text-[20rem]"></i>
-        </div>
     </section>
 
-    <!-- Sección de Servicios -->
+    <!-- Servicios -->
     <section id="servicios" class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Servicios Especializados</h2>
                 <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
             </div>
-
             <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <div class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
                     <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-computer text-2xl text-blue-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Reparación Técnica</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Mantenimiento y diagnóstico de computadores y servidores.</p>
+                    <p class="text-slate-500 text-sm">Mantenimiento y diagnóstico de computadores y servidores.</p>
                 </div>
-
                 <div class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
                     <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-network-wired text-2xl text-blue-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Redes y WiFi</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Instalación y optimización de conectividad de alta velocidad.</p>
+                    <p class="text-slate-500 text-sm">Instalación y optimización de conectividad de alta velocidad.</p>
                 </div>
-
                 <div class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
                     <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-shield-halved text-2xl text-blue-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Seguridad Electrónica</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Cámaras CCTV y alarmas con monitoreo desde el celular.</p>
+                    <p class="text-slate-500 text-sm">Cámaras CCTV y alarmas con monitoreo desde el celular.</p>
                 </div>
-
                 <div class="card-hover bg-slate-50 p-8 rounded-3xl border border-slate-100 group">
                     <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-600 transition">
                         <i class="fa-solid fa-headset text-2xl text-blue-600 group-hover:text-white"></i>
                     </div>
                     <h3 class="text-xl font-bold text-slate-900 mb-3">Venta de Equipos</h3>
-                    <p class="text-slate-500 text-sm leading-relaxed">Hardware, periféricos y accesorios con garantía total.</p>
+                    <p class="text-slate-500 text-sm">Hardware, periféricos y accesorios con garantía total.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección: Galería de Productos y Servicios -->
+    <!-- Galería -->
     <section id="galeria" class="py-24 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Nuestro Trabajo y Productos</h2>
-                <div class="w-20 h-1.5 bg-blue-600 mx-auto rounded-full"></div>
-                <p class="text-slate-500 mt-6 max-w-2xl mx-auto">Calidad visual en cada una de nuestras intervenciones y productos disponibles.</p>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Item Galería 1 -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-slate-900 mb-16">Nuestro Trabajo y Productos</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-left">
                 <div class="gallery-item group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1587202395106-5178bd023344?auto=format&fit=crop&q=80&w=600" alt="[Imagen de Reparación de Computador]" class="w-full h-72 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div>
-                            <span class="text-blue-400 text-xs font-bold uppercase">Servicio Técnico</span>
-                            <h4 class="text-white font-bold text-lg">Reparación de Portátiles</h4>
-                        </div>
+                    <img src="https://images.unsplash.com/photo-1587202395106-5178bd023344?auto=format&fit=crop&q=80&w=600" alt="[Reparación de Computador]" class="w-full h-72 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition">
+                        <div><span class="text-blue-400 text-xs font-bold uppercase">Soporte</span><h4 class="text-white font-bold text-lg">Reparación Técnica</h4></div>
                     </div>
                 </div>
-
-                <!-- Item Galería 2 -->
                 <div class="gallery-item group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=600" alt="[Imagen de Cámaras de Seguridad]" class="w-full h-72 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div>
-                            <span class="text-blue-400 text-xs font-bold uppercase">Seguridad</span>
-                            <h4 class="text-white font-bold text-lg">Instalación CCTV</h4>
-                        </div>
+                    <img src="https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&q=80&w=600" alt="[Cámaras de Seguridad]" class="w-full h-72 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition">
+                        <div><span class="text-blue-400 text-xs font-bold uppercase">Seguridad</span><h4 class="text-white font-bold text-lg">Cámaras CCTV</h4></div>
                     </div>
                 </div>
-
-                <!-- Item Galería 3 -->
                 <div class="gallery-item group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600" alt="[Imagen de Accesorios y Equipos]" class="w-full h-72 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div>
-                            <span class="text-blue-400 text-xs font-bold uppercase">Productos</span>
-                            <h4 class="text-white font-bold text-lg">Venta de Periféricos</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item Galería 4 -->
-                <div class="gallery-item group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1563770660941-20978e870e26?auto=format&fit=crop&q=80&w=600" alt="[Imagen de Instalación de Redes]" class="w-full h-72 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div>
-                            <span class="text-blue-400 text-xs font-bold uppercase">Conectividad</span>
-                            <h4 class="text-white font-bold text-lg">Configuración de Redes LAN</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item Galería 5 -->
-                <div class="gallery-item group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1591405351990-4726e331f141?auto=format&fit=crop&q=80&w=600" alt="[Imagen de Componentes de Hardware]" class="w-full h-72 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div>
-                            <span class="text-blue-400 text-xs font-bold uppercase">Hardware</span>
-                            <h4 class="text-white font-bold text-lg">Tarjetas y Memorias</h4>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Item Galería 6 -->
-                <div class="gallery-item group shadow-xl">
-                    <img src="https://images.unsplash.com/photo-1520867064634-93a73970ce11?auto=format&fit=crop&q=80&w=600" alt="[Imagen de Soporte Corporativo]" class="w-full h-72 object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <div>
-                            <span class="text-blue-400 text-xs font-bold uppercase">Empresarial</span>
-                            <h4 class="text-white font-bold text-lg">Mantenimiento Preventivo</h4>
-                        </div>
+                    <img src="https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&q=80&w=600" alt="[Accesorios de Tecnología]" class="w-full h-72 object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent flex items-end p-6 opacity-0 group-hover:opacity-100 transition">
+                        <div><span class="text-blue-400 text-xs font-bold uppercase">Ventas</span><h4 class="text-white font-bold text-lg">Equipos Nuevos</h4></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Sección Nosotros -->
-    <section id="nosotros" class="py-20 bg-slate-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col lg:flex-row gap-16 items-center">
-                <div class="lg:w-1/2">
-                    <div class="relative">
-                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800" alt="[Imagen de Tecnología Profesional]" class="rounded-3xl shadow-2xl relative z-10 border border-white/10">
-                        <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-blue-600 rounded-3xl -z-0"></div>
-                    </div>
-                </div>
-                <div class="lg:w-1/2 space-y-6">
-                    <h2 class="text-4xl font-bold leading-tight">Expertos en llevar su empresa al siguiente nivel tecnológico</h2>
-                    <p class="text-slate-400 text-lg">
-                        En **STP Soluciones Informáticas**, entendemos que la tecnología es el núcleo de su éxito. Ofrecemos asesoría personalizada en el Putumayo para maximizar su eficiencia.
-                    </p>
-                    <ul class="space-y-4">
-                        <li class="flex items-center gap-4">
-                            <div class="bg-blue-600 rounded-full p-1"><i class="fa-solid fa-check text-xs text-white"></i></div>
-                            <span>Personal técnico altamente calificado</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <div class="bg-blue-600 rounded-full p-1"><i class="fa-solid fa-check text-xs text-white"></i></div>
-                            <span>Soporte prioritario para empresas regionales</span>
-                        </li>
-                        <li class="flex items-center gap-4">
-                            <div class="bg-blue-600 rounded-full p-1"><i class="fa-solid fa-check text-xs text-white"></i></div>
-                            <span>Innovación constante en equipos</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Formulario de Contacto Actualizado -->
+    <!-- Formulario de Contacto (Configurado con Formspree) -->
     <section id="contacto" class="py-24 bg-slate-50">
-        <!-- Contenedor ampliado de max-w-5xl a max-w-6xl -->
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="bg-white rounded-[2.5rem] shadow-2xl overflow-hidden border border-slate-200">
                 <div class="flex flex-col lg:flex-row">
-                    
-                    <!-- Panel izquierdo ampliado: lg:w-2/5 (40%) -->
                     <div class="lg:w-2/5 gradient-blue p-10 md:p-12 text-white flex flex-col justify-between">
                         <div>
                             <h3 class="text-2xl font-bold mb-6">Información de Contacto</h3>
-                            <p class="text-slate-400 mb-8">Estamos listos para atenderte de manera personalizada en todo el departamento.</p>
-                            
+                            <p class="text-slate-400 mb-8">Estamos listos para atenderte en todo el departamento.</p>
                             <div class="space-y-6">
-                                <!-- Alineación superior (items-start) para textos largos y shrink-0 en el ícono -->
                                 <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mt-0.5">
-                                        <i class="fa-solid fa-phone text-blue-400"></i>
-                                    </div>
-                                    <span class="break-words leading-relaxed">+57 3503339662</span>
+                                    <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20"><i class="fa-solid fa-phone text-blue-400"></i></div>
+                                    <span>+57 3503339662</span>
                                 </div>
-                                
                                 <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mt-0.5">
-                                        <i class="fa-solid fa-envelope text-blue-400"></i>
-                                    </div>
-                                    <!-- Propiedad break-all agregada para evitar que correos extremadamente largos deformen la caja -->
-                                    <span class="break-all leading-relaxed">STPputumayo@gmail.com.co</span>
+                                    <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20"><i class="fa-solid fa-envelope text-blue-400"></i></div>
+                                    <span class="break-all">stpputumayo@gmail.com</span>
                                 </div>
-                                
                                 <div class="flex items-start gap-4">
-                                    <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20 mt-0.5">
-                                        <i class="fa-solid fa-location-dot text-blue-400"></i>
-                                    </div>
-                                    <span class="break-words leading-relaxed">Cra. Principal #12-34, Barrio Centro, Villagarzón, Departamento del Putumayo, Colombia</span>
+                                    <div class="w-10 h-10 shrink-0 bg-blue-500/10 rounded-full flex items-center justify-center border border-blue-500/20"><i class="fa-solid fa-location-dot text-blue-400"></i></div>
+                                    <span>Villagarzón, Putumayo, Colombia</span>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="mt-12">
-                            <p class="text-xs font-bold uppercase tracking-widest text-slate-500 mb-4">Síguenos en Redes</p>
-                            <div class="flex gap-4">
-                                <a href="#" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] hover:border-[#1877F2] transition-all duration-300 group">
-                                    <i class="fa-brands fa-facebook-f text-white"></i>
-                                </a>
-                                <a href="#" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#E4405F] hover:border-[#E4405F] transition-all duration-300 group">
-                                    <i class="fa-brands fa-instagram text-white"></i>
-                                </a>
-                                <a href="#" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-all duration-300 group">
-                                    <i class="fa-brands fa-whatsapp text-white"></i>
-                                </a>
-                            </div>
+                        <div class="mt-12 flex gap-4">
+                            <a href="#" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#1877F2] transition"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#E4405F] transition"><i class="fa-brands fa-instagram"></i></a>
+                            <a href="https://wa.me/message/LMEFLXQLHABGJ1" target="_blank" class="w-11 h-11 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#25D366] transition"><i class="fa-brands fa-whatsapp"></i></a>
                         </div>
                     </div>
 
-                    <!-- Panel derecho: lg:w-3/5 (60%) -->
                     <div class="lg:w-3/5 p-10 md:p-12 bg-white">
                         <div class="mb-8">
                             <h3 class="text-3xl font-extrabold text-slate-900">Solicite una Cotización</h3>
-                            <p class="text-slate-500 mt-2">Complete el formulario y recibirá una propuesta técnica detallada.</p>
+                            <p class="text-slate-500 mt-2">Envíenos sus datos y nos pondremos en contacto.</p>
                         </div>
-                        <form id="contact-form" class="space-y-6">
+                        <!-- CONFIGURACIÓN DE ENVÍO POR CORREO -->
+                        <form action="https://formspree.io/f/stpputumayo@gmail.com" method="POST" id="contact-form" class="space-y-6">
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="space-y-2">
                                     <label class="text-sm font-semibold text-slate-700 ml-1">Nombre Completo</label>
-                                    <input type="text" placeholder="Ej. Juan Pérez" required class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition">
+                                    <input type="text" name="nombre" placeholder="Ej. Juan Pérez" required class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition">
                                 </div>
                                 <div class="space-y-2">
                                     <label class="text-sm font-semibold text-slate-700 ml-1">Correo Electrónico</label>
-                                    <input type="email" placeholder="ejemplo@correo.com" required class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition">
+                                    <input type="email" name="email" placeholder="ejemplo@correo.com" required class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition">
                                 </div>
                             </div>
                             <div class="space-y-2">
                                 <label class="text-sm font-semibold text-slate-700 ml-1">Servicio de Interés</label>
-                                <select class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition appearance-none bg-white">
+                                <select name="servicio" class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition bg-white">
                                     <option disabled selected>Seleccione una opción</option>
                                     <option>Soporte Técnico Especializado</option>
                                     <option>Instalación de Redes / WiFi</option>
                                     <option>Seguridad CCTV y Alarmas</option>
                                     <option>Compra de Equipos y Hardware</option>
-                                    <option>Otro Servicio</option>
                                 </select>
                             </div>
                             <div class="space-y-2">
-                                <label class="text-sm font-semibold text-slate-700 ml-1">Detalles del Requerimiento</label>
-                                <textarea rows="4" placeholder="Describa brevemente qué necesita..." required class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"></textarea>
+                                <label class="text-sm font-semibold text-slate-700 ml-1">Mensaje o Detalles</label>
+                                <textarea name="mensaje" rows="4" placeholder="¿En qué podemos ayudarle?" required class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition"></textarea>
                             </div>
-                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-xl shadow-blue-200 transition transform active:scale-[0.98] flex items-center justify-center gap-2">
+                            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-xl shadow-blue-200 transition transform active:scale-95 flex items-center justify-center gap-2">
                                 <i class="fa-solid fa-paper-plane text-sm"></i>
                                 Enviar Cotización
                             </button>
+                            <div id="form-status" class="hidden text-center text-green-600 font-semibold p-4 bg-green-50 rounded-xl border border-green-200">
+                                ¡Mensaje enviado con éxito! Nos comunicaremos pronto.
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -410,20 +314,73 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-slate-100 py-12 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <div class="flex justify-center mb-6">
-                <svg viewBox="0 0 550 120" xmlns="http://www.w3.org/2000/svg" class="h-10 opacity-50 grayscale">
-                    <g transform="translate(20, 20)">
-                        <path d="M 35 0 L 65.31 17.5 L 65.31 52.5 L 35 70 L 4.69 52.5 L 4.69 17.5 Z" fill="none" stroke="#000" stroke-width="8" stroke-linejoin="round"/>
-                        <circle cx="35" cy="17.5" r="6" fill="#000" />
-                    </g>
-                    <text x="120" y="70" font-family="Arial, sans-serif" font-size="64" font-weight="900" fill="#000">STP</text>
-                </svg>
-            </div>
-            <p class="text-slate-500 text-sm">© 2024 STP SOLUCIONES INFORMÁTICAS - Putumayo, Colombia.</p>
-        </div>
+    <footer class="bg-slate-100 py-12 border-t border-slate-200 text-center text-slate-500 text-sm">
+        <p>© 2024 STP SOLUCIONES INFORMÁTICAS - Putumayo, Colombia.</p>
     </footer>
 
+    <script>
+        // Menú Móvil
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Manejo del formulario para mostrar mensaje sin recargar página (Opcional)
+        const form = document.getElementById('contact-form');
+        const status = document.getElementById('form-status');
+        
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const data = new FormData(form);
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: data,
+                headers: { 'Accept': 'application/json' }
+            });
+            if (response.ok) {
+                form.reset();
+                status.classList.remove('hidden');
+                setTimeout(() => status.classList.add('hidden'), 5000);
+            } else {
+                alert('Hubo un error al enviar. Intente de nuevo.');
+            }
+        };
+
+        // Canvas de fondo
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+        }
+        class P {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.sx = (Math.random() - 0.5) * 0.5;
+                this.sy = (Math.random() - 0.5) * 0.5;
+            }
+            u() {
+                this.x += this.sx; this.y += this.sy;
+                if(this.x<0||this.x>canvas.width) this.sx*=-1;
+                if(this.y<0||this.y>canvas.height) this.sy*=-1;
+            }
+            d() {
+                ctx.fillStyle = 'rgba(59,130,246,0.3)';
+                ctx.beginPath(); ctx.arc(this.x,this.y,1,0,Math.PI*2); ctx.fill();
+            }
+        }
+        function init() {
+            resize();
+            particles = Array.from({length: 100}, () => new P());
+        }
+        function loop() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            particles.forEach(p => { p.u(); p.d(); });
+            requestAnimationFrame(loop);
+        }
+        window.addEventListener('resize', resize);
+        init(); loop();
+    </script>
 </body>
 </html>
